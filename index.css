@@ -1,0 +1,87 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body, .container {
+    background-color: #36393f; /* Discord's dark gray background */
+    color: #ffffff; /* White text color */
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+input, button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+input {
+    width: 250px; /* Adjust width to allow button beside it */
+    background-color: #40444b; /* Discord input background */
+    color: #dcddde; /* Light gray text */
+    margin-right: 5px; /* Space between the input and the button */
+}
+
+button {
+    background-color: #5865f2; /* Discord's bluish button color */
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #4752c4; /* Darker blue on hover */
+}
+
+ul {
+    list-style: none; /* Removes bullet points */
+    padding: 10px;
+    background-color: #2f3136; /* Slightly lighter gray for the list */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 360px; /* Max width for the list */
+}
+
+li {
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #40444b; /* Matching input background */
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between; /* Ensures space between the content and the button */
+    align-items: center;
+}
+
+li:nth-child(odd) {
+    background-color: #36393f; /* Slightly different color for odd items */
+}
+
+
+
+.delete-btn {
+    padding: 6px 10px;
+    background-color: #ed4245; /* Discord red color */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #bf3336; /* Darker red on hover */
+}
