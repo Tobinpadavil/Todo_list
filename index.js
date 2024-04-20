@@ -1,33 +1,51 @@
-let leads = [];
+document.addEventListener('DOMContentLoaded', loadTodos); // Load todos when the document is ready
+
 const ulEL = document.getElementById('ul-el');
 const inputEL = document.getElementById('input-el');
 const btnEL = document.getElementById('btn-el');
+let leads = [];
 
-btnEL.addEventListener('click', function() {
-    if (inputEL.value.trim() !== '') {
-        leads.push(inputEL.value);
+btnEL.addEventListener('click', addTodo);
+
+function addTodo() {
+    const todoText = inputEL.value.trim();
+    if (todoText !== '') {
+        leads.push(todoText);
+        saveTodos();
         render();
         inputEL.value = '';
         inputEL.focus(); // Set focus back to input after adding a todo
     }
-});
+}
+
+function loadTodos() {
+    const storedTodos = localStorage.getItem('todos');
+    leads = storedTodos ? JSON.parse(storedTodos) : [];
+    render();
+}
+
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(leads));
+}
 
 function render() {
-    ulEL.innerHTML = ""; // Clear existing HTML content before adding new items
-    for (let i = 0; i < leads.length; i++) {
-        const li = document.createElement("li"); // Create a new list item for each lead
-        li.textContent = leads[i]; // Set the text of the list item
+    ulEL.innerHTML = ''; // Clear existing HTML content before adding new items
+    leads.forEach((lead, index) => {
+        const li = document.createElement('li');
+        li.textContent = lead;
 
-        // Create a delete button for each todo item
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
-        deleteBtn.className = "delete-btn";
-        deleteBtn.onclick = function() {
-            leads.splice(i, 1); // Remove the item from the array
-            render(); // Re-render the list
-        };
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.addEventListener('click', () => deleteTodo(index));
 
-        li.appendChild(deleteBtn); // Append the delete button to the list item
-        ulEL.appendChild(li); // Append the list item to the unordered list
-    }
+        li.appendChild(deleteBtn);
+        ulEL.appendChild(li);
+    });
+}
+
+function deleteTodo(index) {
+    leads.splice(index, 1);
+    saveTodos();
+    render();
 }
